@@ -1,6 +1,7 @@
 <?php
 namespace App\WebSocket;
 
+use EasySwoole\Component\TableManager;
 use EasySwoole\EasySwoole\ServerManager;
 use EasySwoole\EasySwoole\Task\TaskManager;
 use EasySwoole\Socket\AbstractInterface\Controller;
@@ -16,16 +17,17 @@ class Index extends Controller
 {
     public function hello()
     {
-        //{
-        //   "content": {
-        //                  "arg1": "1"
-        //              },
-        //              {
-        //                  "arg2": "2"
-        //              }
-        //}
+        // {"class":"Index","action":"hello","content":{"alianceNum":1,"uid":22357}}
 
-        $this->response()->setMessage('你发的参数是' . json_encode($this->caller()->getArgs()));
+        $args=$this->caller()->getArgs();
+
+        $uid=$args['uid'];
+        $alianceNum=$args['alianceNum'];
+
+        $fd=$this->caller()->getClient()->getFd();
+
+
+        var_dump($uid,$alianceNum,$fd);
     }
 
     public function who()

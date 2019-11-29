@@ -2,6 +2,8 @@
 
 namespace EasySwoole\EasySwoole;
 
+use App\SwooleTable\Aliance;
+use Carbon\Carbon;
 use EasySwoole\EasySwoole\Swoole\EventRegister;
 use EasySwoole\EasySwoole\AbstractInterface\Event;
 use EasySwoole\Http\Request;
@@ -13,7 +15,6 @@ use App\WebSocket\WebSocketParser;
 
 class EasySwooleEvent implements Event
 {
-
     public static function initialize()
     {
         date_default_timezone_set('Asia/Shanghai');
@@ -21,6 +22,12 @@ class EasySwooleEvent implements Event
 
     public static function mainServerCreate(EventRegister $register): void
     {
+        /**
+         * **************** swoole table **********************
+         */
+        Aliance::getInstance()->createAssemblyHallSwooleTable();
+
+
         /**
          * **************** websocket控制器 **********************
          */
@@ -41,6 +48,25 @@ class EasySwooleEvent implements Event
         {
             $dispatch->dispatch($server, $frame->data, $frame);
         });
+
+        // 注册onOpen
+        $register->set(EventRegister::onOpen, function (\swoole_websocket_server $server, \swoole_http_request $request) use ($dispatch)
+        {
+            //取得fd，然后通过参数发给不同的controller进行业务处理
+
+        });
+
+        // 注册onClose
+        $register->set(EventRegister::onClose, function (\swoole_websocket_server $server, $fd) use ($dispatch)
+        {
+            //取得fd，然后通过参数发给不同的controller进行业务处理
+
+        });
+
+
+
+
+
     }
 
     public static function onRequest(Request $request, Response $response): bool
