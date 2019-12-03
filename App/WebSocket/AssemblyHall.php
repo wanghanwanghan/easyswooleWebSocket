@@ -71,7 +71,7 @@ class AssemblyHall extends Controller
 
                 $res['content']=$content;
 
-                $server->push($fd,[json_encode($res)]);
+                $server->push($fd,json_encode([$res]));
             }
         });
     }
