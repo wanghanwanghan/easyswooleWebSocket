@@ -5,6 +5,7 @@ namespace App\WebSocket;
 use App\MysqlClient\MysqlConnection;
 use App\SwooleTable\Aliance;
 use App\Tools\RedisClient;
+use EasySwoole\Component\Singleton;
 use EasySwoole\Component\TableManager;
 use EasySwoole\EasySwoole\ServerManager;
 use EasySwoole\EasySwoole\Task\TaskManager;
@@ -12,6 +13,8 @@ use EasySwoole\Socket\AbstractInterface\Controller;
 
 class AssemblyHall extends Controller
 {
+    use Singleton;
+
     //获取聊天内容，顺便打开websocket
     public function getChatContent()
     {
@@ -63,8 +66,6 @@ class AssemblyHall extends Controller
         {
             $server=ServerManager::getInstance()->getSwooleServer();
 
-            $fillData=(new AssemblyHall());
-
             foreach ($server->connections as $fd)
             {
                 $clientFd=$client->getFd();
@@ -75,10 +76,9 @@ class AssemblyHall extends Controller
                 if ($fd==$clientFd || !$res || $res['alianceNum']!=$alianceNum) continue;
 
                 $res['content']=$content;
+                $res['unixTime']=time();
 
-                $fillData->fillData([$res]);
-
-                $server->push($fd,json_encode([$res]));
+                $server->push($fd,json_encode(AssemblyHall::getInstance()->fillData([$res])));
             }
         });
     }
@@ -94,7 +94,7 @@ class AssemblyHall extends Controller
     }
 
     //根据uid添加用户名和头像
-    private function fillData($data)
+    public function fillData($data)
     {
         foreach ($data as &$one)
         {
