@@ -67,6 +67,9 @@ class AssemblyHall extends Controller
             //不推送给自己和不存在内存表中
             $res=TableManager::getInstance()->get(Aliance::ALIANCECHATS)->get((string)$fd);
 
+            var_dump($res);
+
+
             if ($fd==$clientFd || !$res || $res['alianceNum']!=$alianceNum) continue;
 
             $res['content']=$content;
