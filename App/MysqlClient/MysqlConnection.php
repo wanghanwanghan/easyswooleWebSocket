@@ -65,9 +65,24 @@ class MysqlConnection
         $this->setAlianceClient();
 
         $this->client->queryBuilder()
-            ->orderBy('unixTime')
+            ->orderBy('unixTime','desc')
             ->limit($num)
             ->get('alianceChat'.$alianceNum);
+
+        return $this->client->execBuilder();
+    }
+
+    //插入一条新的聊天记录
+    public function insertOneChat($alianceNum,$uid,$content)
+    {
+        $this->setAlianceConfig();
+        $this->setAlianceClient();
+
+        $this->client->queryBuilder()->insert('alianceChat'.$alianceNum,[
+            'uid'=>$uid,
+            'unixTime'=>time(),
+            'content'=>$content
+        ]);
 
         return $this->client->execBuilder();
     }

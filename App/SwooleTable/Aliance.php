@@ -9,12 +9,17 @@ class Aliance
     use Singleton;
 
     //联盟议事厅表名
-    const ALIANCECHAT = 'AlianceChat';
+    const ALIANCECHATS = 'AlianceChats';
 
     //创建联盟议事厅内存表
     public function createAssemblyHallSwooleTable()
     {
         $col=[
+            //用户主键
+            'uid'=>[
+                'type'=>TableManager::TYPE_INT,
+                'size'=>4
+            ],
             // 联盟编号
             'alianceNum'=>[
                 'type'=>TableManager::TYPE_INT,
@@ -22,7 +27,7 @@ class Aliance
             ],
         ];
 
-        TableManager::getInstance()->add(self::ALIANCECHAT,$col);
+        TableManager::getInstance()->add(self::ALIANCECHATS,$col);
     }
 
 

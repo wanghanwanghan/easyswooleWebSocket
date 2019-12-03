@@ -3,6 +3,8 @@ namespace App\Tools;
 
 class Base64
 {
+    //$res=Base64::decode(Base64::encode("今天上火了么？hello，123444"));
+
     private static function normalToBase64Char($num)
     {
         if ($num >= 0 && $num <= 25) {

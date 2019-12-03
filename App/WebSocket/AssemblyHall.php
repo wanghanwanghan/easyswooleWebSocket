@@ -3,53 +3,15 @@
 namespace App\WebSocket;
 
 use App\MysqlClient\MysqlConnection;
-use App\Tools\Base64;
-use EasySwoole\Mysqli\Client;
-use EasySwoole\Mysqli\Config;
+use App\SwooleTable\Aliance;
+use EasySwoole\Component\TableManager;
+use EasySwoole\EasySwoole\ServerManager;
+use EasySwoole\EasySwoole\Task\TaskManager;
 use EasySwoole\Socket\AbstractInterface\Controller;
 
 class AssemblyHall extends Controller
 {
-    //联盟议事厅
-    private function getMysqlConfig()
-    {
-        $assemblyHall=[
-            'driver' => 'mysql',
-            'host' => '183.136.232.236',
-            'port' => '3306',
-            'database' => 'aliance',
-            'username' => 'chinaiiss',
-            'password' => 'chinaiiss',
-            'unix_socket' => '',
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'strict' => false,
-            'engine' => null,
-        ];
-
-        $config = new Config([
-            'host'          => $assemblyHall['host'],
-            'port'          => $assemblyHall['port'],
-            'user'          => $assemblyHall['username'],
-            'password'      => $assemblyHall['password'],
-            'database'      => $assemblyHall['database'],
-            'timeout'       => 5,
-            'charset'       => $assemblyHall['charset'],
-        ]);
-
-        $client = new Client($config);
-
-        go(function () use ($client,$config)
-        {
-            //构建sql
-            $client->queryBuilder()->get('user_list');
-
-            //执行sql
-            var_dump($client->execBuilder());
-        });
-    }
-
+    //获取聊天内容，顺便打开websocket
     public function getChatContent()
     {
         // {"class":"AssemblyHall","action":"getChatContent","content":{"uid":22357,"alianceNum":1}}
@@ -62,20 +24,66 @@ class AssemblyHall extends Controller
 
         $fd=$this->caller()->getClient()->getFd();
 
-        // 先取得最近的100条聊天记录
-        $res=MysqlConnection::getInstance()->chatLimit($alianceNum,100);
+        //加入内存表
+        $this->createUidAndFdRelation($uid,$alianceNum,$fd);
 
+        //取得最近的聊天记录
+        $res=MysqlConnection::getInstance()->chatLimit($alianceNum,50);
 
+        $this->response()->setMessage($res);
+    }
 
+    //处理客户端发送过来的消息
+    public function getClientMsg()
+    {
+        // {"class":"AssemblyHall","action":"getClientMsg","content":{"uid":22357,"alianceNum":1,"content":"什么冬梅"}}
 
-        $res=Base64::decode(Base64::encode("今天上火了么？hello，123444"));
+        $args=$this->caller()->getArgs();
 
+        $uid=$args['uid'];
 
-        var_dump($res);
+        $alianceNum=$args['alianceNum'];
 
-        var_dump(Base64::encode("今天上火了么？hello，123444"));
+        //用户输入内容
+        $content=$args['content'];
 
+        $client=$this->caller()->getClient();
 
+        //异步mysql
+        go(function () use ($uid,$alianceNum,$content)
+        {
+            MysqlConnection::getInstance()->insertOneChat($alianceNum,$uid,$content);
+        });
+
+        //异步推送
+        TaskManager::getInstance()->async(function () use ($client,$content)
+        {
+            $server=ServerManager::getInstance()->getSwooleServer();
+
+            foreach ($server->connections as $fd)
+            {
+                $clientFd=$client->getFd();
+
+                //不推送给自己和不存在内存表中
+                $res=TableManager::getInstance()->get(Aliance::ALIANCECHATS)->get((string)$fd);
+
+                if ($fd==$clientFd || !$res) continue;
+
+                $res['content']=$content;
+
+                $server->push($fd,json_encode($res));
+            }
+        });
+    }
+
+    //建立uid和fd的关系，删除关系在onClose里
+    private function createUidAndFdRelation($uid,$alianceNum,$fd)
+    {
+        $getObj=TableManager::getInstance()->get(Aliance::ALIANCECHATS);
+
+        $getObj->set((string)$fd,['uid'=>$uid,'alianceNum'=>$alianceNum]);
+
+        return true;
     }
 
 

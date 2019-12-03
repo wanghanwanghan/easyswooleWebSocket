@@ -4,6 +4,7 @@ namespace EasySwoole\EasySwoole;
 
 use App\SwooleTable\Aliance;
 use Carbon\Carbon;
+use EasySwoole\Component\TableManager;
 use EasySwoole\EasySwoole\Swoole\EventRegister;
 use EasySwoole\EasySwoole\AbstractInterface\Event;
 use EasySwoole\Http\Request;
@@ -60,6 +61,7 @@ class EasySwooleEvent implements Event
         $register->set(EventRegister::onClose, function (\swoole_websocket_server $server, $fd) use ($dispatch)
         {
             //取得fd，然后通过参数发给不同的controller进行业务处理
+            TableManager::getInstance()->get(Aliance::ALIANCECHATS)->del($fd);
 
         });
 
