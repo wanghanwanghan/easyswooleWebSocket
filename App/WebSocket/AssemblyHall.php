@@ -55,15 +55,11 @@ class AssemblyHall extends Controller
 
         $client=$this->caller()->getClient();
 
-        //异步mysql
-        go(function () use ($uid,$alianceNum,$content)
+        //异步推送 异步mysql
+        go(function () use ($uid,$alianceNum,$client,$content,$alianceNum)
         {
             MysqlConnection::getInstance()->insertOneChat($alianceNum,$uid,$content);
-        });
 
-        //异步推送
-        TaskManager::getInstance()->async(function () use ($client,$content,$alianceNum)
-        {
             $server=ServerManager::getInstance()->getSwooleServer();
 
             foreach ($server->connections as $fd)
