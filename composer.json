@@ -5,7 +5,8 @@
         "easyswoole/task": "^1.0",
         "easyswoole/mysqli": "^2.0",
         "easyswoole/orm": "^1.1",
-        "nesbot/carbon": "^2.27"
+        "nesbot/carbon": "^2.27",
+        "easyswoole/redis": "^1.1"
     },
     "autoload": {
         "psr-4": {

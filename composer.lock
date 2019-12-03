@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b654ab8fd5c5f543335a942bb69e292f",
+    "content-hash": "a034c7482890fc66be5554c28a0fa184",
     "packages": [
         {
             "name": "dragonmantank/cron-expression",
@@ -18,13 +18,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/dragonmantank/cron-expression/zipball/72b6fbf76adb3cf5bc0db68559b33d41219aba27",
                 "reference": "72b6fbf76adb3cf5bc0db68559b33d41219aba27",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": "^7.0"
@@ -78,13 +72,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/easy-swoole/annotation/zipball/89d586ae21b0ccdcac48bf36e0599077b3b7445b",
                 "reference": "89d586ae21b0ccdcac48bf36e0599077b3b7445b",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "easyswoole/spl": "^1.1",
@@ -133,13 +121,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/easy-swoole/component/zipball/7675f6d6e2adaf701e7631e2d2c97e2c62f3cf04",
                 "reference": "7675f6d6e2adaf701e7631e2d2c97e2c62f3cf04",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "easyswoole/spl": "^1.1",
@@ -191,13 +173,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/easy-swoole/config/zipball/7d2754ed63c961d53ed33a69fb92de26e4914e26",
                 "reference": "7d2754ed63c961d53ed33a69fb92de26e4914e26",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "easyswoole/spl": "^1.1",
@@ -246,13 +222,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/easy-swoole/ddl/zipball/84dbada2c49115b2bacc6a4cc10b166205fae14a",
                 "reference": "84dbada2c49115b2bacc6a4cc10b166205fae14a",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "easyswoole/spl": "^1.2"
@@ -296,13 +266,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/easy-swoole/easyswoole/zipball/b05b030a8a1a2e6630c403c9acbf10be6c72ac3b",
                 "reference": "b05b030a8a1a2e6630c403c9acbf10be6c72ac3b",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "dragonmantank/cron-expression": "^2.2",
@@ -362,13 +326,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/easy-swoole/http/zipball/1dd718dbc351f139467df905c3707534aebebfae",
                 "reference": "1dd718dbc351f139467df905c3707534aebebfae",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "easyswoole/annotation": "^1.0",
@@ -421,13 +379,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/easy-swoole/log/zipball/a9f7a8c139523db90992f89a91f2714413f6d637",
                 "reference": "a9f7a8c139523db90992f89a91f2714413f6d637",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "type": "library",
             "autoload": {
@@ -467,13 +419,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/easy-swoole/mysqli/zipball/3e86513a5a2922d731e38208d463f6953516c40a",
                 "reference": "3e86513a5a2922d731e38208d463f6953516c40a",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "easyswoole/spl": "^1.2"
@@ -521,13 +467,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/easy-swoole/orm/zipball/3087d9881b10f4b1daaf47faf67445985186a360",
                 "reference": "3087d9881b10f4b1daaf47faf67445985186a360",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "easyswoole/component": "^2.0",
@@ -580,13 +520,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/easy-swoole/pool/zipball/cddd486c6c03afd637ed04f50a5655e86aa99930",
                 "reference": "cddd486c6c03afd637ed04f50a5655e86aa99930",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "easyswoole/spl": "^1.3",
@@ -625,6 +559,55 @@
             "time": "2019-10-29T11:45:16+00:00"
         },
         {
+            "name": "easyswoole/redis",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/easy-swoole/redis.git",
+                "reference": "42727d6755d0bb301fdaa0ff7847a792568a3ac7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github-api-proxy.cnpkg.org/repos/easy-swoole/redis/zipball/42727d6755d0bb301fdaa0ff7847a792568a3ac7",
+                "reference": "42727d6755d0bb301fdaa0ff7847a792568a3ac7",
+                "shasum": ""
+            },
+            "require": {
+                "easyswoole/spl": "^1.2",
+                "ext-swoole": "^4.4.0",
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "easyswoole/phpunit": ">=1.0.0",
+                "easyswoole/swoole-ide-helper": "^1.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EasySwoole\\Redis\\": "src/"
+                }
+            },
+            "notification-url": "https://repo.packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "YF",
+                    "email": "291323003@qq.com"
+                }
+            ],
+            "description": "easyswoole component",
+            "homepage": "https://www.easyswoole.com/",
+            "keywords": [
+                "async",
+                "easyswoole",
+                "framework",
+                "swoole"
+            ],
+            "time": "2019-12-02T16:11:45+00:00"
+        },
+        {
             "name": "easyswoole/socket",
             "version": "1.1.10",
             "source": {
@@ -636,13 +619,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/easy-swoole/socket/zipball/d6100a3f7c35c256f67cb9b9c539032568c8aa83",
                 "reference": "d6100a3f7c35c256f67cb9b9c539032568c8aa83",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "easyswoole/spl": "^1.0",
@@ -690,13 +667,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/easy-swoole/spl/zipball/efe31178d3f589f3843fadc592caca1fe3b1e4e0",
                 "reference": "efe31178d3f589f3843fadc592caca1fe3b1e4e0",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "ext-json": "*",
@@ -744,13 +715,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/easy-swoole/task/zipball/a58f85a8b2f552b805c62c99904d4f25940d868d",
                 "reference": "a58f85a8b2f552b805c62c99904d4f25940d868d",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "easyswoole/component": "^2.0",
@@ -788,13 +753,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/easy-swoole/trigger/zipball/f449f974d6645342134f455ce4a6885c8ad3a92e",
                 "reference": "f449f974d6645342134f455ce4a6885c8ad3a92e",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "easyswoole/log": "^1.0"
@@ -837,13 +796,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/easy-swoole/utility/zipball/585252be9ed0cdfd8badbddb7df60edce794daf0",
                 "reference": "585252be9ed0cdfd8badbddb7df60edce794daf0",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "ext-json": "*",
@@ -881,13 +834,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/easy-swoole/validate/zipball/ae03b588b52392d41d8bf26345b4884e004ad6a0",
                 "reference": "ae03b588b52392d41d8bf26345b4884e004ad6a0",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "easyswoole/spl": "^1.0",
@@ -934,13 +881,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/jeremeamia/super_closure/zipball/5707d5821b30b9a07acfb4d76949784aaa0e9ce9",
                 "reference": "5707d5821b30b9a07acfb4d76949784aaa0e9ce9",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "nikic/php-parser": "^1.2|^2.0|^3.0|^4.0",
@@ -998,13 +939,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/13b8485a8690f103bf19cba64879c218b102b726",
                 "reference": "13b8485a8690f103bf19cba64879c218b102b726",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "ext-json": "*",
@@ -1074,13 +1009,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/nikic/FastRoute/zipball/181d480e08d9476e61381e04a71b34dc0432e812",
                 "reference": "181d480e08d9476e61381e04a71b34dc0432e812",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0"
@@ -1126,13 +1055,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/9a9981c347c5c49d6dfe5cf826bb882b824080dc",
                 "reference": "9a9981c347c5c49d6dfe5cf826bb882b824080dc",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
@@ -1184,13 +1107,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
                 "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
@@ -1240,13 +1157,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/7b4aab9743c30be783b73de055d24a39cf4b954f",
                 "reference": "7b4aab9743c30be783b73de055d24a39cf4b954f",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -1305,13 +1216,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/0e3b212e96a51338639d8ce175c046d7729c3403",
                 "reference": "0e3b212e96a51338639d8ce175c046d7729c3403",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
@@ -1367,13 +1272,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/polyfill-util/zipball/4317de1386717b4c22caed7725350a8887ab205c",
                 "reference": "4317de1386717b4c22caed7725350a8887ab205c",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -1425,13 +1324,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/translation/zipball/e86df1b0f1672362ecf96023faf2c42241c41330",
                 "reference": "e86df1b0f1672362ecf96023faf2c42241c41330",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": "^7.2.5",
@@ -1508,13 +1401,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/8feb81e6bb1a42d6a3b1429c751d291eb6d05297",
                 "reference": "8feb81e6bb1a42d6a3b1429c751d291eb6d05297",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": "^7.2.9"

@@ -4,6 +4,7 @@ namespace App\WebSocket;
 
 use App\MysqlClient\MysqlConnection;
 use App\SwooleTable\Aliance;
+use App\Tools\RedisClient;
 use EasySwoole\Component\TableManager;
 use EasySwoole\EasySwoole\ServerManager;
 use EasySwoole\EasySwoole\Task\TaskManager;
@@ -29,6 +30,8 @@ class AssemblyHall extends Controller
 
         //取得最近的聊天记录
         $res=MysqlConnection::getInstance()->chatLimit($alianceNum,50);
+
+        $res=$this->fillData($res);
 
         $this->response()->setMessage($res);
     }
@@ -60,6 +63,8 @@ class AssemblyHall extends Controller
         {
             $server=ServerManager::getInstance()->getSwooleServer();
 
+            $fillData=(new AssemblyHall());
+
             foreach ($server->connections as $fd)
             {
                 $clientFd=$client->getFd();
@@ -70,6 +75,8 @@ class AssemblyHall extends Controller
                 if ($fd==$clientFd || !$res || $res['alianceNum']!=$alianceNum) continue;
 
                 $res['content']=$content;
+
+                $fillData->fillData([$res]);
 
                 $server->push($fd,json_encode([$res]));
             }
@@ -84,6 +91,21 @@ class AssemblyHall extends Controller
         $getObj->set((string)$fd,['uid'=>$uid,'alianceNum'=>$alianceNum]);
 
         return true;
+    }
+
+    //根据uid添加用户名和头像
+    private function fillData($data)
+    {
+        foreach ($data as &$one)
+        {
+            if (!isset($one['uid'])) continue;
+
+            $one['name']=trim(RedisClient::getInstance()->hget($one['uid'],'name'));
+            $one['avatar']=trim(RedisClient::getInstance()->hget($one['uid'],'avatar'));
+        }
+        unset($one);
+
+        return $data;
     }
 
 
