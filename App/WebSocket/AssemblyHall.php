@@ -56,7 +56,7 @@ class AssemblyHall extends Controller
         });
 
         //异步推送
-        TaskManager::getInstance()->async(function () use ($client,$content)
+        TaskManager::getInstance()->async(function () use ($client,$content,$alianceNum)
         {
             $server=ServerManager::getInstance()->getSwooleServer();
 
@@ -67,7 +67,7 @@ class AssemblyHall extends Controller
                 //不推送给自己和不存在内存表中
                 $res=TableManager::getInstance()->get(Aliance::ALIANCECHATS)->get((string)$fd);
 
-                if ($fd==$clientFd || !$res) continue;
+                if ($fd==$clientFd || !$res || $res['alianceNum']!=$alianceNum) continue;
 
                 $res['content']=$content;
 
