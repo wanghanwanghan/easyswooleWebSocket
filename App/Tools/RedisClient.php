@@ -65,6 +65,13 @@ class RedisClient
         return $this->redis->hget($key,$field);
     }
 
+    public function del($key)
+    {
+        if (empty($key)) return null;
+
+        return $this->redis->del($key);
+    }
+
 
 
 

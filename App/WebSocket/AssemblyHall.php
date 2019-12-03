@@ -25,7 +25,7 @@ class AssemblyHall extends Controller
 
         $fd=$this->caller()->getClient()->getFd();
 
-        //加入内存表
+        //加入内存表FastCache
         $this->createUidAndFdRelation($uid,$alianceNum,$fd);
 
         //取得最近的聊天记录
@@ -64,15 +64,15 @@ class AssemblyHall extends Controller
         {
             $clientFd=$client->getFd();
 
-            $res=TableManager::getInstance()->get(Aliance::ALIANCECHATS)->get("{$fd}_num");
+            $res=RedisClient::getInstance()->get(Aliance::ALIANCECHATS."_{$fd}");
 
             if (!$res) $this->createUidAndFdRelation($uid,$alianceNum,$clientFd);
 
             if ($fd==$clientFd) continue;
 
-            if ($res['alianceNum']!=$alianceNum) continue;
+            $res=json_decode($res,true);
 
-            var_dump($res);
+            if ($res['alianceNum']!=$alianceNum) continue;
 
             $res['content']=$content;
             $res['unixTime']=time();
@@ -111,9 +111,7 @@ class AssemblyHall extends Controller
     //建立uid和fd的关系，删除关系在onClose里
     private function createUidAndFdRelation($uid,$alianceNum,$fd)
     {
-        $getObj=TableManager::getInstance()->get(Aliance::ALIANCECHATS);
-
-        $getObj->set("{$fd}_num",['uid'=>$uid,'alianceNum'=>$alianceNum]);
+        RedisClient::getInstance()->set(Aliance::ALIANCECHATS."_{$fd}",json_encode(['uid'=>$uid,'alianceNum'=>$alianceNum]));
 
         return true;
     }

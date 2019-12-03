@@ -3,10 +3,11 @@
 namespace EasySwoole\EasySwoole;
 
 use App\SwooleTable\Aliance;
-use Carbon\Carbon;
+use App\Tools\RedisClient;
 use EasySwoole\Component\TableManager;
 use EasySwoole\EasySwoole\Swoole\EventRegister;
 use EasySwoole\EasySwoole\AbstractInterface\Event;
+use EasySwoole\FastCache\Cache;
 use EasySwoole\Http\Request;
 use EasySwoole\Http\Response;
 
@@ -26,8 +27,13 @@ class EasySwooleEvent implements Event
         /**
          * **************** swoole table **********************
          */
-        Aliance::getInstance()->createAssemblyHallSwooleTable();
+        //有坑！！！！
+        //Aliance::getInstance()->createAssemblyHallSwooleTable();
 
+        /**
+         * **************** FastCache table **********************
+         */
+        // Cache::getInstance()->setTempDir(EASYSWOOLE_TEMP_DIR)->attachToServer(ServerManager::getInstance()->getSwooleServer());
 
         /**
          * **************** websocket控制器 **********************
@@ -61,7 +67,7 @@ class EasySwooleEvent implements Event
         $register->set(EventRegister::onClose, function (\swoole_websocket_server $server, $fd) use ($dispatch)
         {
             //取得fd，然后通过参数发给不同的controller进行业务处理
-            TableManager::getInstance()->get(Aliance::ALIANCECHATS)->del("{$fd}_num");
+            RedisClient::getInstance()->del(Aliance::ALIANCECHATS."_{$fd}");
 
         });
 
