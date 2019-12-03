@@ -64,13 +64,15 @@ class AssemblyHall extends Controller
         {
             $clientFd=$client->getFd();
 
-            //不推送给自己和不存在内存表中
-            $res=TableManager::getInstance()->get(Aliance::ALIANCECHATS)->get((string)$fd);
+            $res=TableManager::getInstance()->get(Aliance::ALIANCECHATS)->get("{$fd}_num");
+
+            if (!$res) $this->createUidAndFdRelation($uid,$alianceNum,$clientFd);
+
+            if ($fd==$clientFd) continue;
+
+            if ($res['alianceNum']!=$alianceNum) continue;
 
             var_dump($res);
-
-
-            if ($fd==$clientFd || !$res || $res['alianceNum']!=$alianceNum) continue;
 
             $res['content']=$content;
             $res['unixTime']=time();
@@ -111,7 +113,7 @@ class AssemblyHall extends Controller
     {
         $getObj=TableManager::getInstance()->get(Aliance::ALIANCECHATS);
 
-        $getObj->set((string)$fd,['uid'=>$uid,'alianceNum'=>$alianceNum]);
+        $getObj->set("{$fd}_num",['uid'=>$uid,'alianceNum'=>$alianceNum]);
 
         return true;
     }
