@@ -72,7 +72,7 @@ class AssemblyHall extends Controller
 
             $res=json_decode($res,true);
 
-            if ($res['alianceNum']!=$alianceNum) continue;
+            if ($res['alianceNum']!=$alianceNum || $res['uid']==$uid) continue;
 
             $res['content']=$content;
             $res['unixTime']=time();
