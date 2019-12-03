@@ -60,15 +60,15 @@ class AssemblyHall extends Controller
 
         $server=ServerManager::getInstance()->getSwooleServer();
 
+        $clientFd=$client->getFd();
+
         foreach ($server->connections as $fd)
         {
-            $clientFd=$client->getFd();
-
-            $res=RedisClient::getInstance()->get(Aliance::ALIANCECHATS."_{$fd}");
-
-            if (!$res) $this->createUidAndFdRelation($uid,$alianceNum,$clientFd);
-
             if ($fd==$clientFd) continue;
+
+            $res=RedisClient::getInstance()->get(Aliance::ALIANCECHATS."_{$clientFd}");
+
+            if (!$res) continue;
 
             $res=json_decode($res,true);
 

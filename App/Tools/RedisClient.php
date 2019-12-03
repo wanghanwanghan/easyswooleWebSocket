@@ -72,6 +72,13 @@ class RedisClient
         return $this->redis->del($key);
     }
 
+    public function expire($key,$s)
+    {
+        if (empty($key)) return null;
+
+        return $this->redis->expire($key,$s);
+    }
+
 
 
 
