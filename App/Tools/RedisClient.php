@@ -3,7 +3,6 @@
 namespace App\Tools;
 
 use EasySwoole\Component\Singleton;
-use EasySwoole\EasySwoole\Config;
 
 class RedisClient
 {
@@ -13,35 +12,44 @@ class RedisClient
 
     private function __construct()
     {
-        //判断拓展安装没
-        if (!extension_loaded('redis')) throw new \Exception('没有redis拓展');
+        $this->init();
+    }
 
-        try
-        {
-            $this->redis=new \Redis();
-            $config=[
-                'host'=>'183.136.232.236',
-                'port'=>6379,
-                'timeout'=>5,
-                'auth'=>'wanghan123',
-                'database'=>12
-            ];
-            $host=$config['host'];
-            $port=$config['port'];
-            $timeOut=$config['timeout'];
+    private function getRedisConf($name='')
+    {
+        
+    }
 
-            $res=$this->redis->connect($host,$port,$timeOut);
+    //创建redis对象
+    private function init()
+    {
+        $this->redis=new \Redis();
 
-        }catch (\Exception $e)
-        {
-            throw new \Exception('redis服务异常');
-        }
+        $config=[
+            'host'=>'183.136.232.236',
+            'port'=>6379,
+            'timeout'=>5,
+            'auth'=>'wanghan123',
+            'database'=>12
+        ];
 
-        if ($res==null) throw new \Exception('redis对象生成异常');
+        $host=$config['host'];
+        $port=$config['port'];
+        $timeout=$config['timeout'];
+
+        $this->redis->connect($host,$port,$timeout);
 
         $this->redis->auth($config['auth']);
 
         $this->redis->select($config['database']);
+
+        return true;
+    }
+
+    //更换链接
+    public function conn($name)
+    {
+
     }
 
     public function get($key)

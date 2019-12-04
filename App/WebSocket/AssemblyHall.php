@@ -4,6 +4,7 @@ namespace App\WebSocket;
 
 use App\MysqlClient\MysqlConnection;
 use App\SwooleTable\Aliance;
+use App\Tools\FormatDate;
 use App\Tools\RedisClient;
 use EasySwoole\Component\Singleton;
 use EasySwoole\Component\TableManager;
@@ -95,7 +96,7 @@ class AssemblyHall extends Controller
         });
     }
 
-    //建立uid和fd的关系，删除关系在onClose里
+    //建立uid和fd的关系
     private function createUidAndFdRelation($uid,$alianceNum,$fd)
     {
         TableManager::getInstance()->get(Aliance::ALIANCECHATS)->set($fd,['uid'=>$uid,'alianceNum'=>$alianceNum]);
@@ -112,6 +113,7 @@ class AssemblyHall extends Controller
 
             $one['name']=trim(RedisClient::getInstance()->hget($one['uid'],'name'));
             $one['avatar']=trim(RedisClient::getInstance()->hget($one['uid'],'avatar'));
+            $one['date']=FormatDate::getInstance()->formatDate($one['unixTime']);
         }
         unset($one);
 
