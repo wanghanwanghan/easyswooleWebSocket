@@ -55,10 +55,10 @@ class AssemblyHall extends Controller
 
         $client=$this->caller()->getClient();
 
-        $res=TableManager::getInstance()->get(Aliance::ALIANCECHATS)->get((string)$client->getFd());
+        $res=TableManager::getInstance()->get(Aliance::ALIANCECHATS)->get($client->getFd());
 
         //重新建立关系
-        if (!$res) $this->createUidAndFdRelation($uid,$alianceNum,(string)$client->getFd());
+        if (!$res) $this->createUidAndFdRelation($uid,$alianceNum,$client->getFd());
 
         //异步mysql
         go(function () use ($uid,$alianceNum,$content)
@@ -75,7 +75,7 @@ class AssemblyHall extends Controller
 
             $clientFd=$client->getFd();
 
-            $res=TableManager::getInstance()->get(Aliance::ALIANCECHATS)->get((string)$clientFd);
+            $res=TableManager::getInstance()->get(Aliance::ALIANCECHATS)->get($clientFd);
 
             $res['content']=$content;
             $res['unixTime']=time();
@@ -84,7 +84,11 @@ class AssemblyHall extends Controller
 
             foreach ($server->connections as $fd)
             {
-                if ($fd==$clientFd || $res['alianceNum']!=$alianceNum) continue;
+                if ($fd==$clientFd) continue;
+
+                $fdInfo=TableManager::getInstance()->get(Aliance::ALIANCECHATS)->get($fd);
+
+                if (!$fdInfo || $fdInfo['alianceNum']!=$alianceNum) continue;
 
                 $server->push($fd,json_encode($res));
             }
