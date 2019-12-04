@@ -64,6 +64,7 @@ class EasySwooleEvent implements Event
         $register->set(EventRegister::onClose, function (\swoole_websocket_server $server, $fd) use ($dispatch)
         {
             //取得fd，然后通过参数发给不同的controller进行业务处理
+            TableManager::getInstance()->get(Aliance::ALIANCECHATS)->del($fd);
         });
 
 

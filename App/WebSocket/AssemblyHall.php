@@ -33,7 +33,7 @@ class AssemblyHall extends Controller
         $this->createUidAndFdRelation($uid,$alianceNum,$fd);
 
         //取得最近的聊天记录
-        $res=MysqlConnection::getInstance()->chatLimit($alianceNum,50);
+        $res=MysqlConnection::getInstance()->chatLimit($alianceNum,200);
 
         $res=$this->fillData($res);
 
@@ -110,7 +110,6 @@ class AssemblyHall extends Controller
         foreach ($data as &$one)
         {
             if (!isset($one['uid'])) continue;
-
             $one['name']=trim(RedisClient::getInstance()->hget($one['uid'],'name'));
             $one['avatar']=trim(RedisClient::getInstance()->hget($one['uid'],'avatar'));
             $one['date']=FormatDate::getInstance()->formatDate($one['unixTime']);
