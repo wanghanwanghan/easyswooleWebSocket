@@ -27,7 +27,7 @@ class Aliance
             ],
         ];
 
-        TableManager::getInstance()->add(self::ALIANCECHATS,$col);
+        TableManager::getInstance()->add(self::ALIANCECHATS,$col,128);
     }
 
 

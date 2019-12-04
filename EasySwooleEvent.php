@@ -27,13 +27,11 @@ class EasySwooleEvent implements Event
         /**
          * **************** swoole table **********************
          */
-        //有坑！！！！
-        //Aliance::getInstance()->createAssemblyHallSwooleTable();
+        Aliance::getInstance()->createAssemblyHallSwooleTable();
 
-        /**
-         * **************** FastCache table **********************
-         */
-        // Cache::getInstance()->setTempDir(EASYSWOOLE_TEMP_DIR)->attachToServer(ServerManager::getInstance()->getSwooleServer());
+
+
+
 
         /**
          * **************** websocket控制器 **********************
@@ -60,15 +58,12 @@ class EasySwooleEvent implements Event
         $register->set(EventRegister::onOpen, function (\swoole_websocket_server $server, \swoole_http_request $request) use ($dispatch)
         {
             //取得fd，然后通过参数发给不同的controller进行业务处理
-
         });
 
         // 注册onClose
         $register->set(EventRegister::onClose, function (\swoole_websocket_server $server, $fd) use ($dispatch)
         {
             //取得fd，然后通过参数发给不同的controller进行业务处理
-            RedisClient::getInstance()->expire(Aliance::ALIANCECHATS."_{$fd}",600);
-
         });
 
 

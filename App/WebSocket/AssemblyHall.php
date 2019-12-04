@@ -5,6 +5,7 @@ namespace App\WebSocket;
 use App\MysqlClient\MysqlConnection;
 use App\SwooleTable\Aliance;
 use App\Tools\RedisClient;
+use EasySwoole\Component\Singleton;
 use EasySwoole\Component\TableManager;
 use EasySwoole\EasySwoole\ServerManager;
 use EasySwoole\EasySwoole\Task\TaskManager;
@@ -12,6 +13,8 @@ use EasySwoole\Socket\AbstractInterface\Controller;
 
 class AssemblyHall extends Controller
 {
+    use Singleton;
+
     //获取聊天内容，顺便打开websocket
     public function getChatContent()
     {
@@ -25,7 +28,7 @@ class AssemblyHall extends Controller
 
         $fd=$this->caller()->getClient()->getFd();
 
-        //加入内存表FastCache
+        //加入内存表
         $this->createUidAndFdRelation($uid,$alianceNum,$fd);
 
         //取得最近的聊天记录
@@ -52,66 +55,46 @@ class AssemblyHall extends Controller
 
         $client=$this->caller()->getClient();
 
+        $res=TableManager::getInstance()->get(Aliance::ALIANCECHATS)->get((string)$client->getFd());
+
+        //重新建立关系
+        if (!$res) $this->createUidAndFdRelation($uid,$alianceNum,(string)$client->getFd());
+
         //异步mysql
         go(function () use ($uid,$alianceNum,$content)
         {
             MysqlConnection::getInstance()->insertOneChat($alianceNum,$uid,$content);
         });
 
-        $server=ServerManager::getInstance()->getSwooleServer();
-
-        $clientFd=$client->getFd();
-
-        foreach ($server->connections as $fd)
+        //异步推送
+        TaskManager::getInstance()->async(function () use ($client,$content,$alianceNum)
         {
-            if ($fd==$clientFd) continue;
+            $server=ServerManager::getInstance()->getSwooleServer();
 
-            $res=RedisClient::getInstance()->get(Aliance::ALIANCECHATS."_{$clientFd}");
+            $fillDataObj=AssemblyHall::getInstance();
 
-            if (!$res) continue;
+            $clientFd=$client->getFd();
 
-            $res=json_decode($res,true);
-
-            if ($res['alianceNum']!=$alianceNum || $res['uid']==$uid) continue;
+            $res=TableManager::getInstance()->get(Aliance::ALIANCECHATS)->get((string)$clientFd);
 
             $res['content']=$content;
             $res['unixTime']=time();
 
-            $res=$this->fillData([$res]);
+            $res=$fillDataObj->fillData([$res]);
 
-            $server->push($fd,json_encode($res));
-        }
+            foreach ($server->connections as $fd)
+            {
+                if ($fd==$clientFd || $res['alianceNum']!=$alianceNum) continue;
 
-
-
-
-
-        //异步推送
-//        TaskManager::getInstance()->async(function () use ($client,$content,$alianceNum)
-//        {
-//            $server=ServerManager::getInstance()->getSwooleServer();
-//
-//            foreach ($server->connections as $fd)
-//            {
-//                $clientFd=$client->getFd();
-//
-//                //不推送给自己和不存在内存表中
-//                $res=TableManager::getInstance()->get(Aliance::ALIANCECHATS)->get((string)$fd);
-//
-//                if ($fd==$clientFd || !$res || $res['alianceNum']!=$alianceNum) continue;
-//
-//                $res['content']=$content;
-//                $res['unixTime']=time();
-//
-//                $server->push($fd,json_encode(AssemblyHall::getInstance()->fillData([$res])));
-//            }
-//        });
+                $server->push($fd,json_encode($res));
+            }
+        });
     }
 
     //建立uid和fd的关系，删除关系在onClose里
     private function createUidAndFdRelation($uid,$alianceNum,$fd)
     {
-        RedisClient::getInstance()->set(Aliance::ALIANCECHATS."_{$fd}",json_encode(['uid'=>$uid,'alianceNum'=>$alianceNum]));
+        TableManager::getInstance()->get(Aliance::ALIANCECHATS)->set($fd,['uid'=>$uid,'alianceNum'=>$alianceNum]);
 
         return true;
     }
