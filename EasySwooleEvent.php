@@ -75,11 +75,14 @@ class EasySwooleEvent implements Event
 
     public static function onRequest(Request $request, Response $response): bool
     {
+        //所有请求来临，第一个被执行的函数
+        //有点像中间件
         return true;
     }
 
     public static function afterRequest(Request $request, Response $response): void
     {
-
+        //所有请求处理结束后被执行，在gc之前
+        //写日志之类的
     }
 }

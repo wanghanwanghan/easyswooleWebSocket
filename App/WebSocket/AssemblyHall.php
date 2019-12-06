@@ -6,6 +6,7 @@ use App\MysqlClient\MysqlConnection;
 use App\SwooleTable\Aliance;
 use App\Tools\FormatDate;
 use App\Tools\RedisClient;
+use App\Tools\Sort;
 use EasySwoole\Component\Singleton;
 use EasySwoole\Component\TableManager;
 use EasySwoole\EasySwoole\ServerManager;
@@ -36,6 +37,8 @@ class AssemblyHall extends Controller
         $res=MysqlConnection::getInstance()->chatLimit($alianceNum,200);
 
         $res=$this->fillData($res);
+
+        $res=(new Sort())->arraySort1($res,['desc','unixTime']);
 
         $this->response()->setMessage($res);
     }
