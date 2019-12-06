@@ -1,8 +1,12 @@
 <?php
 namespace App\Tools;
 
+use EasySwoole\Component\Singleton;
+
 class Sort
 {
+    use Singleton;
+
     //二维数组按照某一列排序
     public function arraySort1($array,$cond=['desc','id'])
     {

@@ -38,7 +38,7 @@ class AssemblyHall extends Controller
 
         $res=$this->fillData($res);
 
-        $res=(new Sort())->arraySort1($res,['asc','unixTime']);
+        $res=Sort::getInstance()->arraySort1($res,['asc','unixTime']);
 
         $this->response()->setMessage($res);
     }
